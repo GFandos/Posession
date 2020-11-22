@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TVBehaviour : MonoBehaviour
+public class BinBehaviour : MonoBehaviour
 {
 
     private Animator animator;
@@ -18,21 +18,18 @@ public class TVBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void TurnOnOff()
+    public void Open()
     {
 
-        if(animator.GetBool("on"))
+        if (!animator.GetBool("opened"))
         {
-            animator.SetBool("on", false);
-        } else
-        {
-            animator.SetBool("on", true);
+            animator.SetBool("opened", true);
         }
 
-        audioSource.Play();
+        //audioSource.Play();
 
     }
 

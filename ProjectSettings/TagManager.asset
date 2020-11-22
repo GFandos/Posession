@@ -15,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - UI-TOP
   - 
   - 
   - 
@@ -46,11 +46,17 @@ TagManager:
   - name: Base
     uniqueID: 29721113
     locked: 0
+  - name: Carpet
+    uniqueID: 4211076989
+    locked: 0
   - name: Walls
     uniqueID: 3219085697
     locked: 0
   - name: Furniture
     uniqueID: 689238851
+    locked: 0
+  - name: Furniture_2
+    uniqueID: 2804001697
     locked: 0
   - name: Player
     uniqueID: 3188147955

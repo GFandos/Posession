@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class TV : MonoBehaviour
+public class Gate : MonoBehaviour
 {
-
     public bool playerInRange;
+    GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +18,12 @@ public class TV : MonoBehaviour
     {
         if (Input.GetButtonDown("interact") && playerInRange)
         {
-            this.GetComponent<TVBehaviour>().TurnOnOff();
+            if (player.GetComponent<PlayerInventory>().getHasKey())
+            {
+                player.GetComponent<PlayerInventory>().setHasKey(false);
+                this.GetComponent<GateBehaviour>().Open();
+            }
+
         }
     }
 
@@ -28,6 +32,7 @@ public class TV : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            this.player = other.gameObject;
         }
     }
 

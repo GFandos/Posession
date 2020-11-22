@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TV : MonoBehaviour
+public class Bin : MonoBehaviour
 {
 
     public bool playerInRange;
+    GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,12 @@ public class TV : MonoBehaviour
     {
         if (Input.GetButtonDown("interact") && playerInRange)
         {
-            this.GetComponent<TVBehaviour>().TurnOnOff();
+            this.GetComponent<BinBehaviour>().Open();
+            if(this.GetComponent<ItemInventory>().getKey())
+            {
+                player.GetComponent<PlayerInventory>().setHasKey(true);
+                this.GetComponent<ItemInventory>().setKey(false);
+            }
         }
     }
 
@@ -28,6 +34,7 @@ public class TV : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            this.player = other.gameObject;
         }
     }
 
