@@ -1,36 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Mirror;
 using UnityEngine;
 
-public class BinBehaviour : MonoBehaviour
+public class ContainerBehaviour : NetworkBehaviour
 {
 
     private Animator animator;
     public AudioSource audioSource;
     public bool canPlay;
 
-    // Start is called before the first frame update
+    [ServerCallback]
     void Start()
     {
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    [Server]
+    public void DoBehaviour()
     {
-
-    }
-
-    public void Open()
-    {
-
         if (!animator.GetBool("opened"))
         {
             animator.SetBool("opened", true);
         }
-
-        //audioSource.Play();
-
     }
 
 }

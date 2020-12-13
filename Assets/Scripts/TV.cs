@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TV : MonoBehaviour
+public class TV : NetworkBehaviour
 {
 
     public bool playerInRange;

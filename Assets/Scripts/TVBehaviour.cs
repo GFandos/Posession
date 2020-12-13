@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TVBehaviour : MonoBehaviour
+public class TVBehaviour : NetworkBehaviour
 {
 
     private Animator animator;
