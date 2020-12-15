@@ -12,7 +12,7 @@ public class NetworkManagerPossession : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
 
-        Transform start;
+        Transform start; 
         GameObject player;
 
         switch (numPlayers)

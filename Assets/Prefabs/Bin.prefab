@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6622140205377776459}
   - component: {fileID: 2287224692455377103}
   m_Layer: 0
-  m_Name: Bin
+  m_Name: Bin_1
   m_TagString: Container
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,3 +213,4 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   key: 0
+  playerIds: ded9ffff68d7ffff70d3ffff1cd2ffff64ccffff

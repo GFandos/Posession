@@ -1,35 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 using Mirror;
-using System.ComponentModel;
 
 public class Player : NetworkBehaviour
 {
-    [SerializeField] public GameObject[] keyContainers;
+    [SerializeField] private GameObject[] initialAreaKeyContainers;
+    [SerializeField] private GameObject[] firstAreaKeyContainers;
+    [SerializeField] private GameObject[] SecondAreaKeyContainers;
     [SerializeField] private bool playerInRangeOfInteraction;
     [SerializeField] public GameObject keyUI;
 
     private GameObject canvas;
     private GameObject gameObjectInRange;
 
+    [ClientCallback]
     void Start()
     {
-        canvas = this.GetComponentInChildren<Canvas>(true).gameObject;
+        canvas = GetComponentInChildren<Canvas>(true).gameObject;
+
+        initialAreaKeyContainers = GameObject.FindGameObjectsWithTag("InitialContainer");
+        firstAreaKeyContainers = GameObject.FindGameObjectsWithTag("FirstAreaContainer");
+        SecondAreaKeyContainers = GameObject.FindGameObjectsWithTag("SecondAreaContainer");
 
         if (isLocalPlayer)
         {
-            canvas.SetActive(true);
-            CmdSetKeyToContainers();
+            CmdSetKeyToInitialContainers();
+            SetGateKeysNeeded();
 
             playerInRangeOfInteraction = false;
-        } else
+            canvas.SetActive(true);
+        }
+        else
         {
             canvas.SetActive(false);
         }
 
+    }
+
+    [Command]
+    void SetGateKeysNeeded()
+    {
+        GameObject[] gates = GameObject.FindGameObjectsWithTag("Gate");
+        foreach (GameObject gate in gates)
+        {
+            gate.GetComponent<Gate>().IncreaseKeysNeeded();
+        }
     }
 
     [ClientCallback]
@@ -55,7 +69,7 @@ public class Player : NetworkBehaviour
     [ClientCallback]
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Container") || other.CompareTag("Gate"))
+        if (other.CompareTag("InitialContainer") || other.CompareTag("FirstAreaContainer") || other.CompareTag("SecondAreaContainer") || other.CompareTag("Gate"))
         {
             playerInRangeOfInteraction = true;
             gameObjectInRange = other.gameObject;
@@ -65,7 +79,7 @@ public class Player : NetworkBehaviour
     [ClientCallback]
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Container") || other.CompareTag("Gate"))
+        if (other.CompareTag("InitialContainer") || other.CompareTag("FirstAreaContainer") || other.CompareTag("SecondAreaContainer") || other.CompareTag("Gate"))
         {
             playerInRangeOfInteraction = false;
             gameObjectInRange = null;
@@ -73,26 +87,23 @@ public class Player : NetworkBehaviour
     }
 
     [Command]
-    private void CmdSetKeyToContainers()
+    private void CmdSetKeyToInitialContainers()
     {
         System.Random rnd = new System.Random();
-        int containersLength = this.keyContainers.Length;
-        int randNum = rnd.Next(0, containersLength);
+        int playerNetworkId = GetComponent<NetworkIdentity>().GetInstanceID();
+        int initialRandNum = rnd.Next(0, initialAreaKeyContainers.Length);
+        int FirstRandNum = rnd.Next(0, firstAreaKeyContainers.Length);
+        int SecondRandNum = rnd.Next(0, SecondAreaKeyContainers.Length);
 
-        for (int i = 0; i < containersLength; i++)
-        {
+        Debug.Log("Initial key set to: " + initialAreaKeyContainers[initialRandNum]);
+        initialAreaKeyContainers[initialRandNum].GetComponent<ItemInventory>().SetKey(true);
+        initialAreaKeyContainers[initialRandNum].GetComponent<ItemInventory>().SetPlayerId(playerNetworkId);
 
-            if (i == randNum)
-            {
-                keyContainers[i].GetComponent<ItemInventory>().SetKey(true);
-            }
-            else
-            {
-                keyContainers[i].GetComponent<ItemInventory>().SetKey(false);
-            }
+        /*firstAreaKeyContainers[FirstRandNum].GetComponent<ItemInventory>().SetKey(true);
+        firstAreaKeyContainers[FirstRandNum].GetComponent<ItemInventory>().SetPlayerId(playerNetworkId);
 
-        }
-
+        SecondAreaKeyContainers[SecondRandNum].GetComponent<ItemInventory>().SetKey(true);
+        SecondAreaKeyContainers[SecondRandNum].GetComponent<ItemInventory>().SetPlayerId(playerNetworkId);*/
     }
     
     [Command]
@@ -106,9 +117,11 @@ public class Player : NetworkBehaviour
     {
         if (playerInRangeOfInteraction && gameObjectInRange != null)
         {
-        
-            if (gameObjectInRange.CompareTag("Container"))
-                gameObjectInRange.GetComponent<Container>().PlayerInteracted();
+
+            int playerNetworkId = GetComponent<NetworkIdentity>().GetInstanceID();
+
+            if (gameObjectInRange.CompareTag("InitialContainer") || gameObjectInRange.CompareTag("FirstAreaContainer") || gameObjectInRange.CompareTag("SecondAreaContainer"))
+                gameObjectInRange.GetComponent<Container>().PlayerInteracted(playerNetworkId);
             else if (gameObjectInRange.CompareTag("Gate"))
                 gameObjectInRange.GetComponent<Gate>().PlayerInteracted();
 

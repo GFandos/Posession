@@ -8,15 +8,16 @@ public class Gate : NetworkBehaviour
 
     public bool playerInRange;
     private GameObject player;
+    [SerializeField] private int keysNeeded;
 
     [ServerCallback]
     void Start()
     {
         playerInRange = false;
+        keysNeeded = 0;
     }
 
-    // Update is called once per frame
-    [ServerCallback]
+    /*[ServerCallback]
     void Update()
     {
         if (Input.GetButtonDown("interact") && playerInRange && player.GetComponent<PlayerInventory>().GetHasKey())
@@ -24,7 +25,7 @@ public class Gate : NetworkBehaviour
             GetComponent<GateBehaviour>().Open();
             player.GetComponent<PlayerInventory>().SetHasKey(false);
         }
-    }
+    }*/
 
     [ServerCallback]
     void OnTriggerEnter2D(Collider2D other)
@@ -51,9 +52,29 @@ public class Gate : NetworkBehaviour
 
         if (playerInRange && player.GetComponent<PlayerInventory>().GetHasKey())
         {
-            GetComponent<GateBehaviour>().Open();
+
+            keysNeeded--;
+
+            if(keysNeeded == 0)
+            {
+                GetComponent<GateBehaviour>().Open();
+            }
+
             player.GetComponent<PlayerInventory>().SetHasKey(false);
+
         }
 
+    }
+
+    [Server]
+    public int GetKeysNeeded()
+    {
+        return keysNeeded;
+    }
+
+    [Server]
+    public void IncreaseKeysNeeded()
+    {
+        keysNeeded++;
     }
 }

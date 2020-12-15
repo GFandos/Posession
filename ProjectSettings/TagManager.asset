@@ -8,6 +8,10 @@ TagManager:
   - TV
   - Container
   - Gate
+  - InitialContainer
+  - FirstAreaContainer
+  - SecondAreaContainer
+  - InitialAreaGate
   layers:
   - Default
   - TransparentFX

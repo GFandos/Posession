@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Mirror;
+using System.Collections.Generic;
 
 public class Container : NetworkBehaviour
 {
@@ -14,7 +15,7 @@ public class Container : NetworkBehaviour
     }
 
     [Server]
-    public void PlayerInteracted()
+    public void PlayerInteracted(int playerId)
     {
 
         if(playerInRange)
@@ -22,10 +23,16 @@ public class Container : NetworkBehaviour
             if (hasBehaviour)
                 this.GetComponent<ContainerBehaviour>().DoBehaviour();
 
-            if (this.GetComponent<ItemInventory>().GetKey())
+            List<int> itemPlayerIds = GetComponent<ItemInventory>().GetPlayerIds();
+            bool itemHasKey = GetComponent<ItemInventory>().GetKey();
+
+            if (itemHasKey && itemPlayerIds.Contains(playerId))
             {
                 player.GetComponent<PlayerInventory>().SetHasKey(true);
-                GetComponent<ItemInventory>().SetKey(false);
+                int idsLeft = GetComponent<ItemInventory>().RemovePlayerId(playerId);
+
+                if(idsLeft == 0) 
+                    GetComponent<ItemInventory>().SetKey(false);
             }
         }
 

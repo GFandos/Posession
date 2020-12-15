@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 8876681814536123081}
   - component: {fileID: 3080619222331643137}
   - component: {fileID: 8625971534695707991}
+  - component: {fileID: -8856776048950320010}
   m_Layer: 0
-  m_Name: Carpet_2
+  m_Name: Carpet
   m_TagString: Container
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,6 +101,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerInRange: 0
+  hasBehaviour: 0
 --- !u!114 &3080619222331643137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +117,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   key: 1
+  playerIds: e8d5ffff90ceffff76f5ffff96f3ffff96f0fffff8eeffff3aebffffe0e3ffff
 --- !u!114 &8625971534695707991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,3 +134,19 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!58 &-8856776048950320010
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5526498626383764227}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.09462023}
+  serializedVersion: 2
+  m_Radius: 0.9165063

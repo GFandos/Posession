@@ -410,9 +410,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  keyContainers:
+  initialAreaKeyContainers:
   - {fileID: 5526498626383764227, guid: 2a5297bbe12249f4e96485baab279dca, type: 3}
-  playerInRangeOfContainer: 0
+  - {fileID: 4228140659800694142, guid: 315f42f02028b614a8aff60b1244d517, type: 3}
+  firstAreaKeyContainers: []
+  playerInRangeOfInteraction: 0
   keyUI: {fileID: 4214749151492210851}
 --- !u!1 &6900772517829843033
 GameObject:
