@@ -23,7 +23,7 @@ public class Player : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            CmdSetKeyToInitialContainers();
+            CmdSetKeyToContainers();
             SetGateKeysNeeded();
 
             playerInRangeOfInteraction = false;
@@ -87,7 +87,7 @@ public class Player : NetworkBehaviour
     }
 
     [Command]
-    private void CmdSetKeyToInitialContainers()
+    private void CmdSetKeyToContainers()
     {
         System.Random rnd = new System.Random();
         int playerNetworkId = GetComponent<NetworkIdentity>().GetInstanceID();
@@ -99,13 +99,14 @@ public class Player : NetworkBehaviour
         initialAreaKeyContainers[initialRandNum].GetComponent<ItemInventory>().SetKey(true);
         initialAreaKeyContainers[initialRandNum].GetComponent<ItemInventory>().SetPlayerId(playerNetworkId);
 
-        /*firstAreaKeyContainers[FirstRandNum].GetComponent<ItemInventory>().SetKey(true);
+        Debug.Log("First key set to: " + firstAreaKeyContainers[FirstRandNum]);
+        firstAreaKeyContainers[FirstRandNum].GetComponent<ItemInventory>().SetKey(true);
         firstAreaKeyContainers[FirstRandNum].GetComponent<ItemInventory>().SetPlayerId(playerNetworkId);
 
-        SecondAreaKeyContainers[SecondRandNum].GetComponent<ItemInventory>().SetKey(true);
+        /*SecondAreaKeyContainers[SecondRandNum].GetComponent<ItemInventory>().SetKey(true);
         SecondAreaKeyContainers[SecondRandNum].GetComponent<ItemInventory>().SetPlayerId(playerNetworkId);*/
     }
-    
+
     [Command]
     void CmdInteract()
     {

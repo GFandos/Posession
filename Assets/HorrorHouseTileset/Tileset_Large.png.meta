@@ -3654,9 +3654,9 @@ TextureImporter:
       name: Sink
       rect:
         serializedVersion: 2
-        x: 15
+        x: 16
         y: 0
-        width: 32
+        width: 31
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

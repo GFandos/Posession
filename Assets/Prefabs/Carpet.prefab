@@ -117,7 +117,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   key: 1
-  playerIds: e8d5ffff90ceffff76f5ffff96f3ffff96f0fffff8eeffff3aebffffe0e3ffff
+  playerIds: 
 --- !u!114 &8625971534695707991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +147,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.09462023}
+  m_Offset: {x: 0.11156261, y: -0.09462023}
   serializedVersion: 2
-  m_Radius: 0.9165063
+  m_Radius: 1.0280689
