@@ -70,10 +70,11 @@ public class Player : NetworkBehaviour
     void Update()
     {
 
-        if(isLocalPlayer)
+        if (isServer)
+            UpdateTimer();
+
+        if (isLocalPlayer)
         {
-            if(isServer)
-                UpdateTimer();
 
             if (Input.GetButtonDown("interact"))
             {
@@ -180,7 +181,7 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     public void RpcUpdateTimer(float minutes, float seconds)
     {
-            timerText.SetText(string.Format("{0:00}:{1:00}", minutes, seconds));
+        timerText.SetText(string.Format("{0:00}:{1:00}", minutes, seconds));
     }
 
 }

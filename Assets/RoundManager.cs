@@ -9,8 +9,9 @@ public class RoundManager : NetworkBehaviour
     [SerializeField] private int numPlayers = 0;
     [SerializeField] private bool roundStarted = false;
     [SerializeField] private bool gameFailed = false;
-    private float currentTime = 0f;
-    private float startingTime = 60f;
+    [SerializeField] private bool victory = false;
+    [SerializeField] private float currentTime = 60f;
+    public float startingTime = 60f;
 
     [ServerCallback]
     void Start()
@@ -24,12 +25,14 @@ public class RoundManager : NetworkBehaviour
         if(!gameFailed && roundStarted)
             currentTime -= 1 * Time.deltaTime;
 
-
         if(currentTime <= 0)
-        {
             gameFailed = true;
-            NetworkManager.singleton.StopHost();
+
+        if (gameFailed || victory)
+        {
+            GameObject.FindWithTag("NetworkManager").GetComponent<NetworkManagerPossessionHUD>().ChangeScene("MainMenu");
         }
+        // NetworkManagerPossession.singleton.ServerChangeScene("MainMenu");
     }
 
     [Server]
@@ -60,5 +63,11 @@ public class RoundManager : NetworkBehaviour
     public bool GetStartRound()
     {
         return roundStarted;
+    }
+
+    [Server]
+    public void FinishRoundVictory()
+    {
+        victory = true;
     }
 }
