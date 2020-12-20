@@ -197,6 +197,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerInRange: 0
+  roundManager: {fileID: 5513031344822924776, guid: 2f35a7247c1164b4694c264789b6672f,
+    type: 3}
   hasBehaviour: 1
 --- !u!114 &2287224692455377103
 MonoBehaviour:

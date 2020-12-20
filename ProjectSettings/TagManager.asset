@@ -12,6 +12,8 @@ TagManager:
   - FirstAreaContainer
   - SecondAreaContainer
   - InitialAreaGate
+  - Switch
+  - RoundManager
   layers:
   - Default
   - TransparentFX

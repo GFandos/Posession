@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using Mirror;
+using TMPro;
+using UnityEngine.UI;
 
 public class Player : NetworkBehaviour
 {
@@ -8,6 +10,8 @@ public class Player : NetworkBehaviour
     [SerializeField] private GameObject[] SecondAreaKeyContainers;
     [SerializeField] private bool playerInRangeOfInteraction;
     [SerializeField] public GameObject keyUI;
+    [SerializeField] public TMP_Text timerText;
+    [SerializeField] private GameObject roundManager;
 
     private GameObject canvas;
     private GameObject gameObjectInRange;
@@ -20,11 +24,13 @@ public class Player : NetworkBehaviour
         initialAreaKeyContainers = GameObject.FindGameObjectsWithTag("InitialContainer");
         firstAreaKeyContainers = GameObject.FindGameObjectsWithTag("FirstAreaContainer");
         SecondAreaKeyContainers = GameObject.FindGameObjectsWithTag("SecondAreaContainer");
+        roundManager = GameObject.FindWithTag("RoundManager");
 
         if (isLocalPlayer)
         {
             CmdSetKeyToContainers();
             SetGateKeysNeeded();
+            SetPlayerNum();
 
             playerInRangeOfInteraction = false;
             canvas.SetActive(true);
@@ -46,6 +52,12 @@ public class Player : NetworkBehaviour
         }
     }
 
+    [Command]
+    void SetPlayerNum()
+    {
+        roundManager.GetComponent<RoundManager>().IncreasePlayerNum();
+    }
+
     [ClientCallback]
     void OnCollisionEnter(Collision collision)
     {
@@ -57,19 +69,43 @@ public class Player : NetworkBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("interact") && isLocalPlayer)
+
+        if(isLocalPlayer)
         {
             if(isServer)
-                PlayerInteraction();
-            else if (isClient)
-                CmdInteract();
+                UpdateTimer();
+
+            if (Input.GetButtonDown("interact"))
+            {
+                if (isServer)
+                {
+                    PlayerInteraction();
+                }
+                else if (isClient)
+                {
+                    CmdInteract();
+                }
+
+            }
+
         }
+
+    }
+
+    [Server]
+    void UpdateTimer()
+    {
+        float currentTime = roundManager.GetComponent<RoundManager>().GetCurrentTime();
+        float minutes = Mathf.FloorToInt(currentTime / 60);
+        float seconds = Mathf.FloorToInt(currentTime % 60);
+
+        RpcUpdateTimer(minutes, seconds);
     }
 
     [ClientCallback]
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("InitialContainer") || other.CompareTag("FirstAreaContainer") || other.CompareTag("SecondAreaContainer") || other.CompareTag("Gate"))
+        if (other.CompareTag("InitialContainer") || other.CompareTag("FirstAreaContainer") || other.CompareTag("SecondAreaContainer") || other.CompareTag("Gate") || other.CompareTag("Switch"))
         {
             playerInRangeOfInteraction = true;
             gameObjectInRange = other.gameObject;
@@ -79,7 +115,7 @@ public class Player : NetworkBehaviour
     [ClientCallback]
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("InitialContainer") || other.CompareTag("FirstAreaContainer") || other.CompareTag("SecondAreaContainer") || other.CompareTag("Gate"))
+        if (other.CompareTag("InitialContainer") || other.CompareTag("FirstAreaContainer") || other.CompareTag("SecondAreaContainer") || other.CompareTag("Gate") || other.CompareTag("Switch"))
         {
             playerInRangeOfInteraction = false;
             gameObjectInRange = null;
@@ -116,15 +152,18 @@ public class Player : NetworkBehaviour
     [Server]
     void PlayerInteraction()
     {
+        Debug.Log("Player interacted");
         if (playerInRangeOfInteraction && gameObjectInRange != null)
         {
-
+            Debug.Log("Is switch? " + gameObjectInRange.CompareTag("Switch"));
             int playerNetworkId = GetComponent<NetworkIdentity>().GetInstanceID();
 
             if (gameObjectInRange.CompareTag("InitialContainer") || gameObjectInRange.CompareTag("FirstAreaContainer") || gameObjectInRange.CompareTag("SecondAreaContainer"))
                 gameObjectInRange.GetComponent<Container>().PlayerInteracted(playerNetworkId);
             else if (gameObjectInRange.CompareTag("Gate"))
                 gameObjectInRange.GetComponent<Gate>().PlayerInteracted();
+            else if (gameObjectInRange.CompareTag("Switch"))
+                gameObjectInRange.GetComponent<Switch>().PlayerInteracted();
 
         }
     }
@@ -136,6 +175,12 @@ public class Player : NetworkBehaviour
         {
             keyUI.SetActive(keyGiven);
         }
+    }
+
+    [ClientRpc]
+    public void RpcUpdateTimer(float minutes, float seconds)
+    {
+            timerText.SetText(string.Format("{0:00}:{1:00}", minutes, seconds));
     }
 
 }

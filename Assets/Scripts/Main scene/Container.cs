@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Container : NetworkBehaviour
 {
     [SerializeField] private bool playerInRange;
+    [SerializeField] private GameObject roundManager;
     private GameObject player;
     public bool hasBehaviour; 
 
@@ -12,13 +13,16 @@ public class Container : NetworkBehaviour
     void Start()
     {
         playerInRange = false;
+        roundManager = GameObject.FindWithTag("RoundManager");
     }
 
     [Server]
     public void PlayerInteracted(int playerId)
     {
 
-        if(playerInRange)
+        bool roundStarted = roundManager.GetComponent<RoundManager>().GetStartRound();
+
+        if (roundStarted && playerInRange)
         {
             if (hasBehaviour)
                 this.GetComponent<ContainerBehaviour>().DoBehaviour();

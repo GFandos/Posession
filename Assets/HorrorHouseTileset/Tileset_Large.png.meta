@@ -40,7 +40,7 @@ TextureImporter:
     second: Tileset_Large_11
   - first:
       213: 3855352187793076770
-    second: Tileset_Large_12
+    second: Bed
   - first:
       213: -6085041818651584705
     second: Bed
@@ -142,10 +142,10 @@ TextureImporter:
     second: Tileset_Large_45
   - first:
       213: -2021671614612988568
-    second: Tileset_Large_46
+    second: SwitchOff
   - first:
       213: 4017184280984436872
-    second: Tileset_Large_47
+    second: SwitchOn
   - first:
       213: 3175426301100778608
     second: Sign-LOVE
@@ -643,7 +643,7 @@ TextureImporter:
     second: Tileset_Large_11
   - first:
       213: 3070077662115216347
-    second: Tileset_Large_12
+    second: Bed
   - first:
       213: 2018923964229698110
     second: Bed
@@ -745,10 +745,10 @@ TextureImporter:
     second: Tileset_Large_45
   - first:
       213: 8368379972583129739
-    second: Tileset_Large_46
+    second: SwitchOff
   - first:
       213: -8831030022160477501
-    second: Tileset_Large_47
+    second: SwitchOn
   - first:
       213: 5492121470128027821
     second: Sign-LOVE
@@ -1495,7 +1495,7 @@ TextureImporter:
         y: 240
         width: 16
         height: 16
-      alignment: 0
+      alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
@@ -1512,7 +1512,7 @@ TextureImporter:
       name: Tileset_Large_9
       rect:
         serializedVersion: 2
-        x: 160
+        x: 168
         y: 240
         width: 16
         height: 16
@@ -1533,8 +1533,8 @@ TextureImporter:
       name: Tileset_Large_10
       rect:
         serializedVersion: 2
-        x: 176
-        y: 240
+        x: 178
+        y: 222
         width: 16
         height: 16
       alignment: 0
@@ -1554,7 +1554,7 @@ TextureImporter:
       name: Tileset_Large_11
       rect:
         serializedVersion: 2
-        x: 192
+        x: 199
         y: 240
         width: 16
         height: 16
@@ -1572,13 +1572,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Large_12
+      name: Bed
       rect:
         serializedVersion: 2
-        x: 208
-        y: 240
-        width: 16
-        height: 16
+        x: 226
+        y: 211
+        width: 28
+        height: 44
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1593,13 +1593,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bed
+      name: Tileset_Large_13
       rect:
         serializedVersion: 2
-        x: 228
-        y: 212
-        width: 24
-        height: 40
+        x: 242
+        y: 59
+        width: 14
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2076,10 +2076,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Large_46
+      name: SwitchOff
       rect:
         serializedVersion: 2
-        x: 16
+        x: 17
         y: 176
         width: 16
         height: 16
@@ -2097,7 +2097,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tileset_Large_47
+      name: SwitchOn
       rect:
         serializedVersion: 2
         x: 32
