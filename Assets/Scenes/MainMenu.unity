@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 79345217}
   - component: {fileID: 79345216}
   - component: {fileID: 79345215}
+  - component: {fileID: 79345218}
   m_Layer: 0
   m_Name: JoinServerBtn
   m_TagString: Untagged
@@ -203,7 +204,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1441055593}
+      - m_Target: {fileID: 79345218}
         m_MethodName: OnConnectAsClient
         m_Mode: 1
         m_Arguments:
@@ -251,6 +252,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79345213}
   m_CullTransparentMesh: 0
+--- !u!114 &79345218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79345213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956a797dc41765d479089f4b2c996fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ipInput: {fileID: 1326066203}
 --- !u!1 &116186846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,6 +1222,7 @@ GameObject:
   - component: {fileID: 1524984341}
   - component: {fileID: 1524984340}
   - component: {fileID: 1524984339}
+  - component: {fileID: 1524984342}
   m_Layer: 0
   m_Name: HostServerBtn
   m_TagString: Untagged
@@ -1278,7 +1293,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1441055593}
+      - m_Target: {fileID: 1524984342}
         m_MethodName: OnHost
         m_Mode: 1
         m_Arguments:
@@ -1326,6 +1341,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524984337}
   m_CullTransparentMesh: 0
+--- !u!114 &1524984342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524984337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956a797dc41765d479089f4b2c996fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ipInput: {fileID: 1326066203}
 --- !u!1 &1569962347
 GameObject:
   m_ObjectHideFlags: 0

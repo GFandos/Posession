@@ -30,9 +30,16 @@ public class RoundManager : NetworkBehaviour
 
         if (gameFailed || victory)
         {
-            GameObject.FindWithTag("NetworkManager").GetComponent<NetworkManagerPossessionHUD>().ChangeScene("MainMenu");
+            //RpcChangeScene();
+            ChangeScene();
         }
-        // NetworkManagerPossession.singleton.ServerChangeScene("MainMenu");
+
+    }
+
+    [ClientRpc]
+    private void RpcChangeScene()
+    {
+        GameObject.FindWithTag("NetworkManager").GetComponent<NetworkManagerPossessionHUD>().ChangeScene();
     }
 
     [Server]
@@ -69,5 +76,10 @@ public class RoundManager : NetworkBehaviour
     public void FinishRoundVictory()
     {
         victory = true;
+    }
+
+    private void ChangeScene()
+    {
+        GameObject.FindWithTag("NetworkManager").GetComponent<NetworkManagerPossessionHUD>().ChangeScene();
     }
 }

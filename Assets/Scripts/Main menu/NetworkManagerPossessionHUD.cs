@@ -5,33 +5,36 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NetworkManagerPossessionHUD : NetworkBehaviour
+public class NetworkManagerPossessionHUD : MonoBehaviour
 {
 
-    //NetworkManagerPossession manager;
+    NetworkManagerPossession manager;
     public TMP_InputField ipInput;
 
     void Awake()
     {
-        //manager = GetComponent<NetworkManagerPossession>();
+        manager = GameObject.FindWithTag("NetworkManager").GetComponent<NetworkManagerPossession>();
     }
 
     public void OnHost()
     {
         Debug.Log("OnHost pressed");
-        GetComponent<NetworkManagerPossession>().StartHost();
+        manager.StartHost();
     }
 
     public void OnConnectAsClient()
     {
-        GetComponent<NetworkManagerPossession>().networkAddress = ipInput.text;
-        GetComponent<NetworkManagerPossession>().StartClient();
+        manager.networkAddress = ipInput.text;
+        manager.StartClient();
     }
 
     [Server]
-    public void ChangeScene(string scene)
+    public void ChangeScene()
     {
-        GetComponent<NetworkManagerPossession>().EndHosting();
+        if (NetworkServer.active && NetworkClient.active)
+        {
+            manager.StopHost();
+        }
     }
 
 }

@@ -43,7 +43,7 @@ public class NetworkManagerPossession : NetworkManager
     [Server]
     public void EndHosting()
     {
-        ServerChangeScene("MainMenu");
+        base.ServerChangeScene("MainMenu");
     }
 
 }
