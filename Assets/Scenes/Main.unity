@@ -512,8 +512,8 @@ MonoBehaviour:
   roundStarted: 0
   gameFailed: 0
   victory: 0
-  currentTime: 10
-  startingTime: 10
+  currentTime: 120
+  startingTime: 120
 --- !u!4 &511683304
 Transform:
   m_ObjectHideFlags: 0
