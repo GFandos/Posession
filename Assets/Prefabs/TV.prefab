@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 689238851
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 4708264387366816472, guid: e0ddf1b282499d84482f286f5fd80685,
     type: 3}
@@ -178,6 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1556be130bdadff43a2318fc012de58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   playerInRange: 0
 --- !u!114 &7106357221377002633
 MonoBehaviour:
@@ -191,6 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c52d67a6b37fa44e8617811f8c60b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   audioSource: {fileID: 7106357221377002639}
   canPlay: 0
 --- !u!82 &7106357221377002639

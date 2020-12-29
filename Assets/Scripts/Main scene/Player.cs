@@ -2,6 +2,8 @@
 using Mirror;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Player : NetworkBehaviour
 {
@@ -14,12 +16,14 @@ public class Player : NetworkBehaviour
     [SerializeField] private GameObject roundManager;
 
     private GameObject canvas;
+    private GameObject pointLight;
     private GameObject gameObjectInRange;
 
     [ClientCallback]
     void Start()
     {
         canvas = GetComponentInChildren<Canvas>(true).gameObject;
+        pointLight = GetComponentInChildren<Light2D>(true).gameObject;
 
         initialAreaKeyContainers = GameObject.FindGameObjectsWithTag("InitialContainer");
         firstAreaKeyContainers = GameObject.FindGameObjectsWithTag("FirstAreaContainer");
@@ -34,10 +38,12 @@ public class Player : NetworkBehaviour
 
             playerInRangeOfInteraction = false;
             canvas.SetActive(true);
+            pointLight.SetActive(true);
         }
         else
         {
             canvas.SetActive(false);
+            pointLight.SetActive(false);
         }
 
     }

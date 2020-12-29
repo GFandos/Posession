@@ -133,6 +133,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerInRange: 0
+  roundManager: {fileID: 0}
   hasBehaviour: 0
 --- !u!61 &-3846964577156306978
 BoxCollider2D:

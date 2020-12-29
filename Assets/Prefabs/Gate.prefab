@@ -197,3 +197,4 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerInRange: 0
+  keysNeeded: 0

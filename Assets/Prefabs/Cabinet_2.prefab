@@ -117,6 +117,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerInRange: 0
+  roundManager: {fileID: 0}
   hasBehaviour: 0
 --- !u!114 &6617201627867931171
 MonoBehaviour:
