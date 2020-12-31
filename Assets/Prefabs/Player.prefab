@@ -468,7 +468,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 0.24
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 000000001982c5017deffffa8159dfbf43f31429a1ab21a7f34607be
   m_LightCookieSprite: {fileID: 0}
@@ -479,8 +479,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.67
-  m_PointLightOuterRadius: 2.81
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 3
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
